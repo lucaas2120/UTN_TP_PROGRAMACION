@@ -7,7 +7,7 @@
 
 ---
 
-## 📌 Descripción del Proyecto
+## Descripción del Proyecto
 
 Este trabajo integrador tiene como objetivo poner en práctica los conceptos fundamentales de algoritmos de **búsqueda** y **ordenamiento**.  
 A través del desarrollo de un programa en Python, se aplicaron algoritmos de búsqueda lineal tanto por nombre como por número de legajo en una lista de estudiantes simulada.
@@ -15,7 +15,7 @@ A través del desarrollo de un programa en Python, se aplicaron algoritmos de b�
 El proyecto busca demostrar cómo se pueden utilizar estos algoritmos en escenarios cotidianos de programación, como en sistemas académicos o administrativos.
 
 ---
-## ⚙️ Instrucciones de Uso
+## Instrucciones de Uso
 
 1. Tener instalado Python en tu computadora.
 2. Descargá o cloná este repositorio.
@@ -39,7 +39,7 @@ El sistema está pensado para funcionar desde la terminal. Una vez ejecutado el 
 El listado de estudiantes está precargado en el código mediante una lista de diccionarios, donde cada entrada representa un estudiante con su nombre y su número de legajo. Esto permite simular una pequeña base de datos sobre la cual aplicar búsquedas simples, que son fundamentales en la mayoría de los programas reales que gestionan información.
 
 
-## 📌 Conclusión del Proyecto
+## Conclusión del Proyecto
 
 Desde el punto de vista técnico y pedagógico, este trabajo nos permitió aplicar de forma concreta los conceptos de búsqueda lineal, además de reforzar habilidades de programación básicas como la iteración, la comparación de cadenas, el manejo de listas y diccionarios, la entrada de datos por teclado y el control de errores. También aprendimos la importancia de ofrecer una experiencia clara al usuario final, cuidando aspectos como la presentación del menú, los mensajes informativos y la validación de entradas.
 
