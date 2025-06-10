@@ -45,3 +45,7 @@ Desde el punto de vista técnico y pedagógico, este trabajo nos permitió aplic
 
 Como equipo, valoramos la experiencia de desarrollar un programa funcional que resuelva una necesidad concreta, aunque sea simple. Nos permitió trabajar en colaboración, dividir tareas y reflexionar sobre cómo mejorar la estructura y legibilidad del código. En resumen, este proyecto no solo nos ayudó a afianzar los contenidos de la materia, sino también a familiarizarnos con buenas prácticas de desarrollo y presentación de software.
 
+
+
+## Link video presentación:
+https://youtu.be/5-uouyjg_wU?si=Po3saur71fbgWnDw
