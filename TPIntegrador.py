@@ -1,64 +1,123 @@
-# Lista precargada de estudiantes
-estudiantes = [
-    {"nombre": "Juan Pérez", "legajo": 1001},
-    {"nombre": "María Gómez", "legajo": 1002},
-    {"nombre": "Carlos Díaz", "legajo": 1003},
-    {"nombre": "Ana Torres", "legajo": 1004},
-    {"nombre": "Lucía Ramírez", "legajo": 1005},
-    {"nombre": "Juan Carlos", "legajo": 1006},
-    {"nombre": "Ana María", "legajo": 1007},
-    {"nombre": "Jorge Atencio", "legajo": 1501},
-    {"nombre": "Lucas Alvarez", "legajo": 1830},
-]
+import time
+import random
 
-# Función de búsqueda lineal por nombre (parcial o completo)
-def buscar_por_nombre(nombre_buscado):
-    resultados = []
-    for estudiante in estudiantes:
-        if nombre_buscado.lower() in estudiante["nombre"].lower():
-            resultados.append(estudiante)
-    return resultados
+#Funcion de ordenamiento tipo bubble sort
+def bubble_sort(lista):
+    for i in range(len(lista)):
+        for j in range(0, len(lista) - i - 1):
+            if lista[j] > lista[j + 1]:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
 
-# Función de búsqueda lineal por legajo
-def buscar_por_legajo(legajo_buscado):
-    for estudiante in estudiantes:
-        if estudiante["legajo"] == legajo_buscado:
-            return estudiante
-    return None
 
-# Menú principal
-def main():
-    while True:
-        print("\n--- Menú de Búsqueda de Estudiantes ---")
-        print("1. Buscar por nombre (parcial o completo)")
-        print("2. Buscar por legajo")
-        print("3. Salir")
+#Funcion de ordenamiento tipo insertion sort
+def insertion_sort(lista):
+    for i in range(1, len(lista)):
+        clave = lista[i]
+        j = i - 1
+        while j >= 0 and clave < lista[j]:
+            lista[j + 1] = lista[j]
+            j -= 1
+        lista[j + 1] = clave
 
-        opcion = input("Seleccione una opción (1-3): ")
+#Funcion de ordenamiento tipo selection sort
+def selection_sort(lista):
+    for i in range(len(lista)):
+        min_idx = i
+        for j in range(i+1, len(lista)):
+            if lista[j] < lista[min_idx]:
+                min_idx = j
+        lista[i], lista[min_idx] = lista[min_idx], lista[i]
 
-        if opcion == "1":
-            nombre = input("Ingrese el nombre o parte del nombre: ")
-            resultados = buscar_por_nombre(nombre)
-            if resultados:
-                print("\nEstudiantes encontrados:")
-                for est in resultados:
-                    print(f"- {est['nombre']} (Legajo: {est['legajo']})")
-            else:
-                print("No se encontraron coincidencias.")
-        elif opcion == "2":
-            try:
-                legajo = int(input("Ingrese el número de legajo: "))
-                resultado = buscar_por_legajo(legajo)
-                if resultado:
-                    print(f"\nEstudiante encontrado: {resultado['nombre']} (Legajo: {resultado['legajo']})")
-                else:
-                    print("Estudiante no encontrado.")
-            except ValueError:
-                print("Por favor, ingrese un número de legajo válido.")
-        elif opcion == "3":
-            print("Saliendo del programa...")
-            break
+#Funcion de busqueda tipo lineal
+def busqueda_lineal(lista, objetivo):
+    for i in range(len(lista)):
+        if lista[i] == objetivo:
+            return i
+    return -1
+
+#Funcion de busqueda tipo binaria
+def busqueda_binaria(lista, objetivo):
+    inicio = 0
+    fin = len(lista) - 1
+    while inicio <= fin:
+        medio = (inicio + fin) // 2
+        if lista[medio] == objetivo:
+            return medio
+        elif lista[medio] < objetivo:
+            inicio = medio + 1
         else:
-            print("Opción no válida. Intente nuevamente.")
+            fin = medio - 1
+    return -1
 
-main()
+
+#Funcion encargada de procesar los datos
+def procesar_datos(numAProcesar):
+    print("______________________________________________")
+    #Imprime la cantidad de elementos que se van a procesar
+    print(f"Pruebas realizadas con {numAProcesar} elementos")
+
+    #Genera una lista de numeros aleatorios entre 1 y 10000 del tamaño indicado
+    datos_original = [random.randint(1, 10000) for _ in range(numAProcesar)]
+
+    #Objetivo a buscar
+    objetivo = datos_original[numAProcesar // 2]
+    
+    #Itera sobre una lista que contiene todos los algoritmos de ordenamientos y su funcion
+    for algoritmo in [("Bubble Sort", bubble_sort), ("Insertion Sort", insertion_sort), ("Selection Sort", selection_sort)]:
+        #Creamos una copia de los datos originales para no modificar la lista base
+        datos = datos_original.copy()
+
+        #Tomamos el tiempo de inicio antes de ejecutar el algoritmo
+        inicio = time.time()
+        
+        #Ejecutamos el algoritmo de ordenamiento sobre la copia
+        algoritmo[1](datos)
+
+        #Calcula el tiempo que tardo en ejecutarse el algoritmo y luego lo imprimimos en pantalla
+        duracion = time.time() - inicio
+        print(f"{algoritmo[0]}: {duracion:.6f} segundos")
+
+    #Ordenamos la lista original
+    datos_ordenados = sorted(datos_original)
+
+    #Medimos el tiempo que tarda en hacer la busqueda binaria
+    inicio = time.time()
+    busqueda_binaria(datos_ordenados, objetivo)
+    print(f"Búsqueda Binaria: {(time.time() - inicio):.6f} segundos")
+
+    #Medimos el tiempo que tarda en hacer la busqueda lineal
+    inicio = time.time()
+    busqueda_lineal(datos_original, objetivo)
+    print(f"Búsqueda Lineal: {(time.time() - inicio):.6f} segundos")
+
+#Funcion principal, encargada de mostrar el menu 
+def menu_interactivo():
+    print(" _____________________________________________________________________________________")
+    print("|                                                                                     |")
+    print("|Bienvenido! Analizaremos los tiempos de procesamiento de distintas tipos de busquedas|")
+    print("|_____________________________________________________________________________________|")
+    
+    #Loop solicitando el ingreso de la cantidad de numeros a procesar.
+    while True:
+        #Imprimimos la pregunta en pantalla, debe ser mayor a 0
+        try:
+            numAProcesar = int(input("Cuántos números querés procesar? "))
+            if numAProcesar <= 0:
+                raise ValueError("Debe ser un número entero positivo.")
+        
+        #Captura de errores
+        except ValueError as e:
+            print(f"Entrada no válida: {e}")
+            continue
+        
+        #Llamamos la funcion encargada de procesar los datos
+        procesar_datos(numAProcesar)
+
+        #Consultamos al usuario si desea procesar otra lista
+        respuesta = input("Querés procesar otra lista? (s/n): ").strip().lower()
+        if respuesta != 's':
+            print("Programa finalizado.")
+            break
+
+#Ejecucion
+menu_interactivo()
