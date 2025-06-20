@@ -107,7 +107,7 @@ def menu_interactivo():
         
         #Captura de errores
         except ValueError as e:
-            print(f"Entrada no válida: {e}")
+            print(f"Entrada no válida: Debe ser un número entero positivo.")
             continue
         
         #Llamamos la funcion encargada de procesar los datos
